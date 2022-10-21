@@ -3,12 +3,11 @@ import "../style/ui_elements_style.css";
 
 interface IFormContent {
   children: ReactNode;
-  props: any;
 }
 
-export const FormContent: FC<IFormContent> = ({ children, props }) => {
+export const FormContent: FC<IFormContent> = ({ children, ...other }) => {
   return (
-    <form className="form_content" noValidate {...props}>
+    <form className="form_content" noValidate {...other}>
       {children}
     </form>
   );
