@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { AddressData } from "./components/address_data";
+import { LoginAndPasswordForm } from "./components/login_password";
+import { PhoneData } from "./components/phone_data";
+import { STEPS } from "./helpers/default_value";
+import { useAppSelector } from "./hooks/redux";
+import { Header } from "./ui_elements/header";
 
 function App() {
+  const { nextStep } = useAppSelector((state) => state.authorizationReducer);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isPartFilled = nextStep !== STEPS.FIRST;
+    if (isPartFilled) {
+      navigate(nextStep);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route index path={STEPS.FIRST} element={<LoginAndPasswordForm />} />
+        <Route path={STEPS.SECOND} element={<AddressData />} />
+        <Route path={STEPS.THIRD} element={<PhoneData />} />
+      </Routes>
+    </>
   );
 }
 
