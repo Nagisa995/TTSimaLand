@@ -1,7 +1,11 @@
 import { FC, forwardRef } from "react";
 import { TextField } from "@mui/material";
 
-export const CustomInput: FC = forwardRef((props, ref) => {
+interface ICustomInput {
+  [key: string]: any;
+}
+
+export const CustomInput: FC<ICustomInput> = forwardRef((props, ref) => {
   return (
     <TextField
       variant="outlined"

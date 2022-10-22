@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 
 interface ISubmitButton {
   children: ReactNode;
+  [key: string]: any;
 }
 
 export const SubmitButton: FC<ISubmitButton> = ({ children, ...other }) => {

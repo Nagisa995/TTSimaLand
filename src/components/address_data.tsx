@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { FC } from "react";
 import { Typography, Divider } from "@mui/material";
 import { FormContainer } from "../ui_elements/form_container";
