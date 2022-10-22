@@ -1,14 +1,16 @@
 import { FC } from "react";
-import { Typography, Divider, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { FormContainer } from "../ui_elements/form_container";
 import { FormContent } from "../ui_elements/form_content";
 import { CustomInput } from "../ui_elements/custom_input";
+import { FormTitle } from "../ui_elements/form_title";
 import { useForm } from "react-hook-form";
 import { SubmitButton } from "../ui_elements/submit_button";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { IPhoneNumberData, STEPS } from "../helpers/default_value";
 import { authorizationReducerSlice } from "../store/reducers/authorization";
+import { requiredValue } from "../helpers/const";
 
 export const PhoneData: FC = () => {
   const { phoneNumberData } = useAppSelector(
@@ -33,16 +35,12 @@ export const PhoneData: FC = () => {
 
   return (
     <FormContainer>
-      <Typography align="center">Номер телефона (3 этап)</Typography>
-      <Divider flexItem />
+      <FormTitle title="Номер телефона (3 этап)" />
 
       <FormContent onSubmit={handleSubmit(onSubmit)}>
         <CustomInput
           {...register("phone", {
-            required: {
-              value: true,
-              message: "Обязательное поле",
-            },
+            required: requiredValue,
           })}
           type="tel"
           label="Номер телефона"
@@ -56,10 +54,7 @@ export const PhoneData: FC = () => {
 
         <CustomInput
           {...register("confirmationCode", {
-            required: {
-              value: true,
-              message: "Обязательное поле",
-            },
+            required: requiredValue,
           })}
           type="text"
           label="Код подтверждения"
